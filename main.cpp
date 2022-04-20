@@ -1,18 +1,28 @@
 #include<iostream>
+#include<fstream>
 using namespace std;
 
-int lim=0;
+int lim=0;//j=0;
 
-void menu();
+
 void access();
+void adminoption();
+void customeroption();
+
 //void exit();
 
 class admin{
 
+    public:
+    void add();
+    void edit();
+    void approve();
+    void decline();
 };
 
 class customer{
-
+    public:
+    void menu();
 };
 
 class wine{
@@ -25,20 +35,43 @@ class wine{
 };
 
 class colddrinks{
+    public:
+    void show(){
+        cout <<"1. SPRITE 2. FANTA"<<endl;
 
+    }
 };
 
-void menu(){
+void customer :: menu(){
+    int ch;
     cout << "Enter choice"<<endl;
     cout<<"1) wine \n 2) colddrinks"<<endl;
+    cin >> ch;
+    switch (ch)
+    {
+    case 1: /* constant-expression */
+
+        wine wineobj;
+        wineobj.show();
+        break;
+    case 2:
+
+        colddrinks coldobj;
+        coldobj.show();
+    default:
+        break;
+    }
 }
+
 void access(){
     int choice,pass,option,j=0;
     string username;
+    //bool check;
     char y_n;
     cout<<"1. admin \n 2. user";
     cin >> choice;
-    if(choice == 1){
+    switch (choice){
+        case 1:
         for (int i=0;i<2;i++){
         cout << "Username : ";
         cin >> username;
@@ -46,27 +79,30 @@ void access(){
         cin >> pass;
             if(username == "ADMIN" && pass == 1234){
                 i=2;
-                cout << "connected as admin \n" << "list of orders " << endl;
-                cout << "Print everything of pending orders"<<endl;
-                while(j != 1){
-                cout <<"1. Decline \n 2. Approve" << endl;
-                cin >> option;
-                switch (option){
-                    case 1:
-                        cout <<"Open file and delete the order" <<endl;
-                        break;
-                    case 2:
-                        cout <<"CUT the order detail to approved orders"<<endl;
-                        break;
+                cout << "connected as admin \n" ;
+                //cout<< "1. ADD ITEMS \n 2. EDIT ITEMS 3. DECLINE \n 4. APPROVE ";
+                //while (j != 0){
 
-                }
-                cout << "continue ? ";
-                cin >> y_n;
-                if (y_n == 'n' || y_n == 'N'){
-                    j = 1;
-                }
 
-                }
+                    adminoption();
+                    cout<<"continue ?";
+                    cin >> y_n;
+                    while (y_n == 'Y' || y_n == 'y'){
+                        adminoption();
+                        cin >> y_n;
+                    }
+                    if (y_n != 'Y' || y_n != 'y' ){
+                        access();
+                    }
+                    
+                //     cout << "CONTINUE ? PRESS n/N TO EXIT";
+                //     cin >> y_n;
+                //     if (y_n == 'n' || y_n == 'N' ){
+                //         j = 1;
+                //     } 
+                // }
+                //cout << "Print everything of pending orders"<<endl;
+                
             }
 
             else{
@@ -75,37 +111,80 @@ void access(){
                 if(lim >=2){
                     cout << "FUCK YOU";
                     //goto bye;
-                
                 }
-            } 
+            }
         }
+        break;
+
+        case 2:
+            customer csobj;
+            csobj.menu();
+            
     }
-    else{
-        menu();
+}
+
+void admin :: add(){
+    int price,code;
+    string name;
+    cout <<"adding ";
+    ofstream myfile;
+    myfile.open("items.txt");
+    cout<<"name : ";
+    cin >> name;
+    cout <<"Price :";
+    cin>> price;
+    cout<< "code";
+    cin >> code;
+    myfile<<name<<" ";
+    myfile<<price<<" ";
+    myfile<<code<<" ";
+
+    // file_out.open(filename, std::ios_base::app);
+    // file_out << "Some random text to append." << endl;
+}
+
+void admin :: edit(){
+    cout <<"editing";
+}
+void admin :: decline(){
+    cout <<"open orderlist.txt and delete using pccode";
+}
+
+void admin :: approve(){
+    cout <<"cut a line of orderlist.txt to other file approvedlist.txt";
+}
+
+void adminoption(){
+    admin obadmin;
+    cout<<"1.ADD 2.EDIT 3.DECLINE 4.APPROVE"<< endl;
+    int ch;
+    cin>>ch;
+    switch (ch){
+        case 1:
+            obadmin.add();
+            break;
+        case 2:
+            obadmin.edit();
+            break;
+        case 3:
+            obadmin.decline();
+            break;
+        case 4:
+            obadmin.approve();
+            break;
     }
+}
+
+void customeroption(){
+    customer csobj;
+    csobj.menu();
 }
 
 int main(){
     int choice;
     cout << "Welcome"<<endl;
     access();
-    if(lim<2){
-    //menu();
-        cin>>choice;
-        switch (choice){
-            case 1:
-                wine wine_ob;
-                wine_ob.show();
-    
-            break;
-            case 2:
-                colddrinks coldob;
-                //coldob.show();
-        //case 2:
-        }
-    //bye:
-    }
-    
+   
     cout <<"Program terminated";
 
     return 0;
