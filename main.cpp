@@ -23,6 +23,7 @@ class admin{
 class customer{
     public:
     void menu();
+    void buyitem();
 };
 
 class wine{
