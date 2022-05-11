@@ -129,23 +129,30 @@ void admin :: add(){
     string name;
     cout <<"adding ";
     ofstream myfile;
-    myfile.open("items.txt");
+    myfile.open("items.txt",ios::app||ios::out);
     cout<<"name : ";
     cin >> name;
     cout <<"Price :";
     cin>> price;
     cout<< "code";
     cin >> code;
-    myfile<<name<<" ";
-    myfile<<price<<" ";
-    myfile<<code<<" ";
+    myfile<<code<<" "<<name<<" "<<price<<endl;
+    myfile.close();
 
-    // file_out.open(filename, std::ios_base::app);
-    // file_out << "Some random text to append." << endl;
+    // file_out.open(filename, std::ios_base::app); // file_out << "Some random text to append." << endl; 
 }
 
 void admin :: edit(){
+    fstream fobj;
+    int pckey;
+    fobj.open("items.txt",ios::out);
+
     cout <<"editing";
+    cin>>pkey;
+
+    while(!fobj.eof()){
+        if (fobj.)
+    }
 }
 void admin :: decline(){
     cout <<"open orderlist.txt and delete using pccode";
