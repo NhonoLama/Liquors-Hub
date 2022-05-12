@@ -1,0 +1,4 @@
+ // void setnull(){
+    //     name ="";
+    //     pcode=
+    // }
