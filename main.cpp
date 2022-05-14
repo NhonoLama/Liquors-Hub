@@ -154,7 +154,7 @@ void admin :: view(){
     
     file.open("Wine.txt",ios::in | ios::binary);
 	cout<<"----------------------------------    WINE    --------------------------------------------\n";
-    cout << "\t\t\tName\t\t\tPrice\t\t\tP-Code\n" <<endl;
+    cout << "\n\n\t\t\tName\t\t\tPrice\t\t\tP-Code\n" <<endl;
 	while((file.read(reinterpret_cast<char *>(&wobj),sizeof(wobj)))){ 
         wobj.putdata();
         cout << endl;
@@ -165,7 +165,7 @@ void admin :: view(){
 
     file.open("Whisky.txt",ios::in | ios::binary);
 	cout<<"\n\n\n--------------------------------------   WHISKY  -----------------------------------------\n";
-    cout << "\t\t\tName\t\t\tPrice\t\t\tP-Code"<<endl;
+    cout << "\n\n\t\t\tName\t\t\tPrice\t\t\tP-Code\n"<<endl;
 	while((file.read(reinterpret_cast<char *>(&whobj),sizeof(whobj)))){ 
         whobj.putdata();
 	    cout<<endl;
@@ -175,7 +175,7 @@ void admin :: view(){
     
     file.open("Beer.txt",ios::in | ios::binary);
 	cout<<"\n\n\n---------------------------------------- BEER ---------------------------------------------\n";
-    cout << "\t\t\tName\t\t\tPrice\t\t\tP-Code"<<endl;
+    cout << "\n\n\t\t\tName\t\t\tPrice\t\t\tP-Code\n"<<endl;
 	while((file.read(reinterpret_cast<char *>(&beobj),sizeof(beobj)))){ 
         beobj.putdata();
 	    cout<<endl;
@@ -185,7 +185,7 @@ void admin :: view(){
 
     file.open("Beer.txt",ios::in | ios::binary);
 	cout<<"\n\n\n--------------------------------------- VODKA --------------------------------------------\n";
-    cout << "Name\t\t Price\t\t P-Code"<<endl;
+    cout << "\n\n\t\tName\t\t\tPrice\t\t\tP-Code\n"<<endl;
 	while((file.read(reinterpret_cast<char *>(&vobj),sizeof(vobj)))){ 
         vobj.putdata();
 	    cout<<endl;
@@ -205,7 +205,7 @@ void customer :: menu(){
 
     file.open("Wine.txt",ios::in | ios::binary);
 	cout<<"-----------------------------------------     WINE   ---------------------------------------------\n";
-    cout << "\t\t\tName\t\t\tPrice\t\t\tP-Code\n";
+    cout << "\n\n\t\t\tName\t\t\tPrice\t\t\tP-Code\n\n\n";
 	while((file.read(reinterpret_cast<char *>(&wobj),sizeof(wobj)))){ 
         wobj.putdata();
         cout << endl;
@@ -216,7 +216,7 @@ void customer :: menu(){
 
     file.open("Whisky.txt",ios::in | ios::binary);
 	cout<<"\n\n\n----------------------------------------- WHISKY ------------------------------------------------\n";
-    cout << "\t\t\tName\t\t\tPrice\t\t\tP-Code"<<endl;
+    cout << "\n\n\t\t\tName\t\t\tPrice\t\t\tP-Code\n"<<endl;
 	while((file.read(reinterpret_cast<char *>(&whobj),sizeof(whobj)))){ 
         whobj.putdata();
 	    cout<<endl;
@@ -226,7 +226,7 @@ void customer :: menu(){
     
     file.open("Beer.txt",ios::in | ios::binary);
 	cout<<"\n\n\n---------------------------------------- BEER ----------------------------------------------\n";
-    cout << "\t\t\tName\t\t\tPrice\t\t\tP-Code"<<endl;
+    cout << "\n\n\t\t\tName\t\t\tPrice\t\t\tP-Code\n"<<endl;
 	while((file.read(reinterpret_cast<char *>(&beobj),sizeof(beobj)))){ 
         beobj.putdata();
 	    cout<<endl;
@@ -236,7 +236,7 @@ void customer :: menu(){
 
     file.open("Vodka.txt",ios::in | ios::binary);
 	cout<<"\n\n\n--------------------------------------- VODKA -----------------------------------------------\n";
-    cout << "\t\t\tName\t\t\tPrice\t\t\tP-Code"<<endl;
+    cout << "\n\n\t\t\tName\t\t\tPrice\t\t\tP-Code\n"<<endl;
 	while((file.read(reinterpret_cast<char *>(&vobj),sizeof(vobj)))){ 
         vobj.putdata();
 	    cout<<endl;
@@ -496,6 +496,7 @@ void admin :: edit(){
             
             }
         }
+        break;
         
     case 2:
         fobj.open("Whisky.txt",ios::in|ios::out|ios::binary);
@@ -523,6 +524,7 @@ void admin :: edit(){
             
             }
         }
+        break;
 
     case 3:
 
@@ -551,6 +553,8 @@ void admin :: edit(){
             
             }
         }
+        break;
+
 
     case 4: 
 
@@ -579,7 +583,9 @@ void admin :: edit(){
             
             }
         }
+    break;
     }
+    
     // while(!fobj.eof()){
     //     if (fobj.)
     // }
@@ -609,14 +615,14 @@ void admin :: decline(){
 
    bool flag=false;
     
-   while(file.read(reinterpret_cast<char *>(&deobj),sizeof (detail))){
+   while(file.read(reinterpret_cast<char*>(&deobj),sizeof (detail))){
        //cout <<"inside while ";
         int size = sizeof(deobj);
          if(deobj.getpcode() == pcode && deobj.getname() == name){
          deobj.setnull();
          long pos = -1*size;
          file.seekp(pos, ios::cur);
-         file.write(reinterpret_cast<const char *>(&deobj),size);
+         file.write(reinterpret_cast<const char*>(&deobj),size);
          flag=true;
          break;
       }
